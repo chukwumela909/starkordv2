@@ -1,0 +1,61 @@
+{
+  "common": {
+    "welcome": "欢迎回来",
+    "logout": "退出登录",
+    "loading": "加载中...",
+    "error": "发生错误",
+    "success": "成功",
+    "save": "保存",
+    "cancel": "取消",
+    "edit": "编辑",
+    "delete": "删除"
+  },
+  "auth": {
+    "signIn": "登录",
+    "signUp": "创建账户",
+    "signInMessage": "登录访问您的质押面板",
+    "signUpMessage": "加入我们，开始您的质押之旅",
+    "email": "电子邮箱",
+    "password": "密码",
+    "confirmPassword": "确认密码",
+    "forgotPassword": "忘记密码？",
+    "noAccount": "没有账户？注册",
+    "hasAccount": "已有账户？登录",
+    "fullName": "姓名",
+    "phone": "电话号码",
+    "country": "国家",
+    "agreeToTerms": "我同意服务条款和隐私政策"
+  },
+  "dashboard": {
+    "title": "质押面板",
+    "totalStaked": "总质押量",
+    "activeStakes": "活跃质押",
+    "totalEarnings": "总收益",
+    "dailyRewards": "每日奖励",
+    "stakingPlans": "可用计划",
+    "transactions": "交易记录",
+    "analytics": "分析",
+    "profile": "个人资料",
+    "support": "支持"
+  },
+  "staking": {
+    "plans": {
+      "coreVault": "核心保险库",
+      "growthNexus": "增长枢纽",
+      "eliteMatrix": "精英矩阵",
+      "legacyProtocol": "传承协议"
+    },
+    "actions": {
+      "stake": "开始质押",
+      "unstake": "解除质押",
+      "restake": "重新质押",
+      "withdraw": "提取"
+    },
+    "status": {
+      "active": "活跃",
+      "pending": "待处理",
+      "completed": "已完成",
+      "failed": "失败"
+    }
+  }
+}

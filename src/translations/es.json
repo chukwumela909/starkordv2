@@ -1,0 +1,61 @@
+{
+  "common": {
+    "welcome": "Bienvenido de nuevo",
+    "logout": "Cerrar sesión",
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "success": "Éxito",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "delete": "Eliminar"
+  },
+  "auth": {
+    "signIn": "Iniciar Sesión",
+    "signUp": "Crear Cuenta",
+    "signInMessage": "Inicia sesión para acceder a tu panel de staking",
+    "signUpMessage": "Únete y comienza tu viaje de staking",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "confirmPassword": "Confirmar Contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "noAccount": "¿No tienes una cuenta? Regístrate",
+    "hasAccount": "¿Ya tienes una cuenta? Inicia sesión",
+    "fullName": "Nombre completo",
+    "phone": "Número de teléfono",
+    "country": "País",
+    "agreeToTerms": "Acepto los Términos de Servicio y la Política de Privacidad"
+  },
+  "dashboard": {
+    "title": "Panel de Staking",
+    "totalStaked": "Total Invertido",
+    "activeStakes": "Inversiones Activas",
+    "totalEarnings": "Ganancias Totales",
+    "dailyRewards": "Recompensas Diarias",
+    "stakingPlans": "Planes Disponibles",
+    "transactions": "Transacciones",
+    "analytics": "Análisis",
+    "profile": "Perfil",
+    "support": "Soporte"
+  },
+  "staking": {
+    "plans": {
+      "coreVault": "Bóveda Core",
+      "growthNexus": "Nexo de Crecimiento",
+      "eliteMatrix": "Matriz Elite",
+      "legacyProtocol": "Protocolo Legacy"
+    },
+    "actions": {
+      "stake": "Comenzar Staking",
+      "unstake": "Retirar",
+      "restake": "Reinvertir",
+      "withdraw": "Retirar"
+    },
+    "status": {
+      "active": "Activo",
+      "pending": "Pendiente",
+      "completed": "Completado",
+      "failed": "Fallido"
+    }
+  }
+}

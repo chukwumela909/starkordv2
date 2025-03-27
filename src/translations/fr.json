@@ -1,0 +1,61 @@
+{
+  "common": {
+    "welcome": "Bon retour",
+    "logout": "Déconnexion",
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue",
+    "success": "Succès",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "edit": "Modifier",
+    "delete": "Supprimer"
+  },
+  "auth": {
+    "signIn": "Connexion",
+    "signUp": "Créer un compte",
+    "signInMessage": "Connectez-vous pour accéder à votre tableau de bord de staking",
+    "signUpMessage": "Rejoignez-nous et commencez votre voyage de staking",
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "forgotPassword": "Mot de passe oublié ?",
+    "noAccount": "Pas de compte ? S'inscrire",
+    "hasAccount": "Déjà un compte ? Se connecter",
+    "fullName": "Nom complet",
+    "phone": "Numéro de téléphone",
+    "country": "Pays",
+    "agreeToTerms": "J'accepte les conditions d'utilisation et la politique de confidentialité"
+  },
+  "dashboard": {
+    "title": "Tableau de Bord Staking",
+    "totalStaked": "Total Staké",
+    "activeStakes": "Stakes Actifs",
+    "totalEarnings": "Gains Totaux",
+    "dailyRewards": "Récompenses Quotidiennes",
+    "stakingPlans": "Plans Disponibles",
+    "transactions": "Transactions",
+    "analytics": "Analytiques",
+    "profile": "Profil",
+    "support": "Support"
+  },
+  "staking": {
+    "plans": {
+      "coreVault": "Coffre-fort Core",
+      "growthNexus": "Nexus de Croissance",
+      "eliteMatrix": "Matrice Élite",
+      "legacyProtocol": "Protocole Legacy"
+    },
+    "actions": {
+      "stake": "Commencer le Staking",
+      "unstake": "Retirer",
+      "restake": "Restaker",
+      "withdraw": "Retirer"
+    },
+    "status": {
+      "active": "Actif",
+      "pending": "En attente",
+      "completed": "Terminé",
+      "failed": "Échoué"
+    }
+  }
+}

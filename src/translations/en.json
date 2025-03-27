@@ -1,0 +1,61 @@
+{
+  "common": {
+    "welcome": "Welcome Back",
+    "logout": "Logout",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signUp": "Create Account",
+    "signInMessage": "Sign in to access your staking dashboard",
+    "signUpMessage": "Join us and start your staking journey",
+    "email": "Email Address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password?",
+    "noAccount": "Don't have an account? Sign Up",
+    "hasAccount": "Already have an account? Sign In",
+    "fullName": "Full Name",
+    "phone": "Phone Number",
+    "country": "Country",
+    "agreeToTerms": "I agree to the Terms of Service and Privacy Policy"
+  },
+  "dashboard": {
+    "title": "Staking Dashboard",
+    "totalStaked": "Total Staked",
+    "activeStakes": "Active Stakes",
+    "totalEarnings": "Total Earnings",
+    "dailyRewards": "Daily Rewards",
+    "stakingPlans": "Available Plans",
+    "transactions": "Transactions",
+    "analytics": "Analytics",
+    "profile": "Profile",
+    "support": "Support"
+  },
+  "staking": {
+    "plans": {
+      "coreVault": "Core Vault",
+      "growthNexus": "Growth Nexus",
+      "eliteMatrix": "Elite Matrix",
+      "legacyProtocol": "Legacy Protocol"
+    },
+    "actions": {
+      "stake": "Start Staking",
+      "unstake": "Unstake",
+      "restake": "Restake",
+      "withdraw": "Withdraw"
+    },
+    "status": {
+      "active": "Active",
+      "pending": "Pending",
+      "completed": "Completed",
+      "failed": "Failed"
+    }
+  }
+}

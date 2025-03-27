@@ -1,0 +1,61 @@
+{
+  "common": {
+    "welcome": "Willkommen zurück",
+    "logout": "Abmelden",
+    "loading": "Laden...",
+    "error": "Ein Fehler ist aufgetreten",
+    "success": "Erfolg",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "edit": "Bearbeiten",
+    "delete": "Löschen"
+  },
+  "auth": {
+    "signIn": "Anmelden",
+    "signUp": "Konto erstellen",
+    "signInMessage": "Melden Sie sich an, um auf Ihr Staking-Dashboard zuzugreifen",
+    "signUpMessage": "Treten Sie bei und beginnen Sie Ihre Staking-Reise",
+    "email": "E-Mail-Adresse",
+    "password": "Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "forgotPassword": "Passwort vergessen?",
+    "noAccount": "Kein Konto? Registrieren",
+    "hasAccount": "Bereits ein Konto? Anmelden",
+    "fullName": "Vollständiger Name",
+    "phone": "Telefonnummer",
+    "country": "Land",
+    "agreeToTerms": "Ich stimme den Nutzungsbedingungen und der Datenschutzerklärung zu"
+  },
+  "dashboard": {
+    "title": "Staking-Dashboard",
+    "totalStaked": "Gesamt Gestaked",
+    "activeStakes": "Aktive Stakes",
+    "totalEarnings": "Gesamtgewinne",
+    "dailyRewards": "Tägliche Belohnungen",
+    "stakingPlans": "Verfügbare Pläne",
+    "transactions": "Transaktionen",
+    "analytics": "Analysen",
+    "profile": "Profil",
+    "support": "Support"
+  },
+  "staking": {
+    "plans": {
+      "coreVault": "Core-Tresor",
+      "growthNexus": "Wachstums-Nexus",
+      "eliteMatrix": "Elite-Matrix",
+      "legacyProtocol": "Legacy-Protokoll"
+    },
+    "actions": {
+      "stake": "Staking starten",
+      "unstake": "Unstaken",
+      "restake": "Restaken",
+      "withdraw": "Abheben"
+    },
+    "status": {
+      "active": "Aktiv",
+      "pending": "Ausstehend",
+      "completed": "Abgeschlossen",
+      "failed": "Fehlgeschlagen"
+    }
+  }
+}

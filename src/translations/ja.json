@@ -1,0 +1,61 @@
+{
+  "common": {
+    "welcome": "お帰りなさい",
+    "logout": "ログアウト",
+    "loading": "読み込み中...",
+    "error": "エラーが発生しました",
+    "success": "成功",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "edit": "編集",
+    "delete": "削除"
+  },
+  "auth": {
+    "signIn": "ログイン",
+    "signUp": "アカウント作成",
+    "signInMessage": "ステーキングダッシュボードにアクセスするにはログインしてください",
+    "signUpMessage": "参加してステーキングの旅を始めましょう",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "confirmPassword": "パスワードの確認",
+    "forgotPassword": "パスワードをお忘れですか？",
+    "noAccount": "アカウントをお持ちでない方は登録",
+    "hasAccount": "すでにアカウントをお持ちの方はログイン",
+    "fullName": "氏名",
+    "phone": "電話番号",
+    "country": "国",
+    "agreeToTerms": "利用規約とプライバシーポリシーに同意します"
+  },
+  "dashboard": {
+    "title": "ステーキングダッシュボード",
+    "totalStaked": "総ステーク額",
+    "activeStakes": "アクティブなステーク",
+    "totalEarnings": "総収益",
+    "dailyRewards": "日次報酬",
+    "stakingPlans": "利用可能なプラン",
+    "transactions": "取引履歴",
+    "analytics": "分析",
+    "profile": "プロフィール",
+    "support": "サポート"
+  },
+  "staking": {
+    "plans": {
+      "coreVault": "コアボールト",
+      "growthNexus": "グロースネクサス",
+      "eliteMatrix": "エリートマトリックス",
+      "legacyProtocol": "レガシープロトコル"
+    },
+    "actions": {
+      "stake": "ステーキングを開始",
+      "unstake": "アンステーク",
+      "restake": "リステーク",
+      "withdraw": "引き出し"
+    },
+    "status": {
+      "active": "アクティブ",
+      "pending": "保留中",
+      "completed": "完了",
+      "failed": "失敗"
+    }
+  }
+}
