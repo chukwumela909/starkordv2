@@ -63,10 +63,10 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen animated-bg text-white">
-        <div className="cyber-grid" />
+        {/* <div className="cyber-grid" />
         <div className="matrix-bg" />
         <div className="blockchain-nodes" />
-        <div className="data-flow" />
+        <div className="data-flow" /> */}
         <PriceHeader />
         <Routes>
           <Route path="/" element={<Layout />}>
