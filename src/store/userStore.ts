@@ -28,6 +28,15 @@ interface User {
     total_rewards: number;
     active_stake_count: number;
     daily_rewards: number;
+    stakes: {
+        staked_at: string;
+        earnings: string;
+        amount: string;
+    }[];
+    monthly_earnings: {
+        month: string;
+        earnings: number;
+    }[];
 }
 
 interface Stake {
@@ -205,42 +214,42 @@ export const useUserStore = create<UserState>((set) => ({
     withdraw: async (amount: string, eth_address: string): Promise<void> => {
         set({ loadingWithdraw: true });
         try {
-          const token = localStorage.getItem('auth-token');
-          console.log(token);
-          if (!token) {
-            console.log("No auth token found")
-            throw new Error('No auth token found');
-          }
-          const response = await axios.post("https://app.starkord.com/api/withdrawal/create.php", {
-            token: token,
-            amount: amount,
-            eth_address: eth_address,
-          }, {
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-              "Authorization": "Bearer a7bX9c2dE5fg1h8i"
-            },
-          });
-    
-          console.log(response);
-    
-          if (response.status !== 200) throw new Error('Failed to withdraw');
-          const data = response.data;
-          console.log(data);
+            const token = localStorage.getItem('auth-token');
+            console.log(token);
+            if (!token) {
+                console.log("No auth token found")
+                throw new Error('No auth token found');
+            }
+            const response = await axios.post("https://app.starkord.com/api/withdrawal/create.php", {
+                token: token,
+                amount: amount,
+                eth_address: eth_address,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    "Authorization": "Bearer a7bX9c2dE5fg1h8i"
+                },
+            });
+
+            console.log(response);
+
+            if (response.status !== 200) throw new Error('Failed to withdraw');
+            const data = response.data;
+            console.log(data);
         } catch (error) {
-          console.error('withdraw error:', error);
-          if (axios.isAxiosError(error) && error.response) {
-            set({ withdrawerror: error.response.data.message });
-          } else {
-            set({ withdrawerror: String(error) });
-            throw error;
-          }
+            console.error('withdraw error:', error);
+            if (axios.isAxiosError(error) && error.response) {
+                set({ withdrawerror: error.response.data.message });
+            } else {
+                set({ withdrawerror: String(error) });
+                throw error;
+            }
         } finally {
-          set({ loadingWithdraw: false });
-          return
+            set({ loadingWithdraw: false });
+            return
         }
-      },
+    },
 }));
 
 // Usage example in a component

@@ -32,6 +32,7 @@ import {
 import { useUserStore } from '../store/userStore';
 import { RestakeModal } from './RestakeModal';
 import { WithdrawModal } from './WithdrawModal';
+import { StakingAnalytics } from './StakingAnalytics';
 
 export function Dashboard() {
   const navigate = useNavigate();
@@ -643,9 +644,15 @@ export function Dashboard() {
           )}
         </motion.div>
 
-        {/* <div className="analytics-section">
-          <StakingAnalytics stakes={stakes || []} ethPrice={ethPrice} />
-        </div> */}
+        <div className="analytics-section">
+        {user?.stakes ? (
+             <StakingAnalytics stakes={user.stakes} ethPrice={ethPrice} monthlyEarnings={user.monthly_earnings} />
+          ) : (
+            <div className="bg-slate-800/50 backdrop-blur-xl rounded-xl p-6 border border-slate-700/50 text-center">
+              <p className="text-slate-400">No staking data available</p>
+            </div>
+          )}
+        </div>
 
         <div className="leaderboard-section">
           <Leaderboard />

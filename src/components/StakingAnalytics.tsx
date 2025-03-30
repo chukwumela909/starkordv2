@@ -1,103 +1,120 @@
-import  { useState } from 'react';
-import { motion } from 'framer-motion';
-import {  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area, BarChart, Bar } from 'recharts';
-import { TrendingUp,  ChevronUp,  DollarSign, Wallet, Award,  Filter } from 'lucide-react';
-import { format, addDays, subDays, startOfMonth, endOfMonth, eachDayOfInterval } from 'date-fns';
+"use client"
 
+import { useState } from "react"
+import { motion } from "framer-motion"
+import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area, BarChart, Bar } from "recharts"
+import { TrendingUp, ChevronUp, DollarSign, Wallet, Award, Filter } from "lucide-react"
+import { format, addDays, subDays } from "date-fns"
+
+// Update the Stake interface to match the provided data structure
 interface Stake {
-  id: string;
-  plan: string;
-  amount: number;
-  daily_yield: number;
-  start_date: string;
-  end_date: string;
-  status: string;
-  total_earned: number;
+  staked_at: string
+  earnings: string
+  amount: string
 }
 
+interface MonthlyEarning {
+  month: string
+  earnings: number
+}
+
+// Update the StakingAnalyticsProps interface
 interface StakingAnalyticsProps {
-  stakes: Stake[];
-  ethPrice: number;
+  stakes: Stake[]
+  ethPrice: number
+  monthlyEarnings: MonthlyEarning[]
 }
 
-export function StakingAnalytics({ stakes, ethPrice }: StakingAnalyticsProps) {
-  const [timeframe, setTimeframe] = useState<'7d' | '30d' | '90d' | 'all'>('30d');
-  const activeStakes = stakes.filter(stake => stake.status === 'active');
-  const totalStaked = activeStakes.reduce((acc, stake) => acc + stake.amount, 0);
-  const totalEarned = activeStakes.reduce((acc, stake) => acc + stake.total_earned, 0);
-  const dailyYield = activeStakes.reduce((acc, stake) => acc + (stake.amount * stake.daily_yield / 100), 0);
+// Replace the existing calculations in the component with ones that work with the new data structure
+export function StakingAnalytics({ stakes, ethPrice, monthlyEarnings = [] }: StakingAnalyticsProps) {
+  const [timeframe, setTimeframe] = useState<"7d" | "30d" | "90d" | "all">("30d")
 
-  // Generate historical data
+  // Calculate metrics from the provided data
+  const totalStaked = stakes.reduce((acc, stake) => acc + Number.parseFloat(stake.amount), 0)
+  const totalEarned = stakes.reduce((acc, stake) => acc + Number.parseFloat(stake.earnings), 0)
+
+  // Estimate daily yield (assuming 0.5% daily yield)
+  const dailyYield = totalStaked * 0.005 // 0.5% daily yield
+
+  // Generate historical data based on staked_at dates and earnings
   const generateHistoricalData = () => {
-    const days = timeframe === '7d' ? 7 : timeframe === '30d' ? 30 : timeframe === '90d' ? 90 : 180;
-    const startDate = subDays(new Date(), days);
-    
-    return Array.from({ length: days + 1 }, (_, i) => {
-      const date = addDays(startDate, i);
-      const dayStakes = stakes.filter(stake => new Date(stake.start_date) <= date);
-      const earnings = dayStakes.reduce((acc, stake) => {
-        const stakeDays = Math.floor((date.getTime() - new Date(stake.start_date).getTime()) / (1000 * 60 * 60 * 24));
-        return acc + (stake.amount * (stake.daily_yield / 100) * stakeDays);
-      }, 0);
+    const days = timeframe === "7d" ? 7 : timeframe === "30d" ? 30 : timeframe === "90d" ? 90 : 180
+    const endDate = new Date()
+    const startDate = subDays(endDate, days)
 
-      return {
-        date: format(date, 'MMM dd'),
-        earnings: Number(earnings.toFixed(4)),
-        tvl: dayStakes.reduce((acc, stake) => acc + stake.amount, 0)
-      };
-    });
-  };
+    // Create a map of dates to track cumulative earnings
+    const dateMap = new Map()
 
-  // Generate monthly performance data
-  const generateMonthlyData = () => {
-    const start = startOfMonth(subDays(new Date(), 180));
-    const end = endOfMonth(new Date());
-    const days = eachDayOfInterval({ start, end });
-    
-    const monthlyData = days.reduce((acc: any, date) => {
-      const monthKey = format(date, 'MMM yyyy');
-      const dayStakes = stakes.filter(stake => new Date(stake.start_date) <= date);
-      const dailyEarnings = dayStakes.reduce((sum, stake) => {
-        return sum + (stake.amount * (stake.daily_yield / 100));
-      }, 0);
+    // Initialize all dates in the range
+    for (let i = 0; i <= days; i++) {
+      const date = addDays(startDate, i)
+      const dateStr = format(date, "MMM dd")
+      dateMap.set(dateStr, { date: dateStr, earnings: 0, tvl: 0 })
+    }
 
-      if (!acc[monthKey]) {
-        acc[monthKey] = { earnings: 0, days: 0 };
+    // Process each stake
+    stakes.forEach((stake) => {
+      const stakeDate = new Date(stake.staked_at)
+      const amount = Number.parseFloat(stake.amount)
+      const earnings = Number.parseFloat(stake.earnings)
+
+      // Only process stakes that started before or during our timeframe
+      if (stakeDate <= endDate) {
+        // Calculate daily earnings (distribute total earnings across days since staking)
+        const stakeDays = Math.max(1, Math.floor((endDate.getTime() - stakeDate.getTime()) / (1000 * 60 * 60 * 24)))
+        const dailyEarning = earnings / stakeDays
+
+        // Add stake amount and earnings to each day after staking
+        let currentDate = new Date(Math.max(stakeDate.getTime(), startDate.getTime()))
+
+        while (currentDate <= endDate) {
+          const dateStr = format(currentDate, "MMM dd")
+          const dayData = dateMap.get(dateStr)
+
+          if (dayData) {
+            // Add stake amount to TVL
+            dayData.tvl += amount
+
+            // Add proportional earnings for this day
+            const daysActive = Math.floor((currentDate.getTime() - stakeDate.getTime()) / (1000 * 60 * 60 * 24))
+            if (daysActive >= 0) {
+              dayData.earnings += dailyEarning
+            }
+          }
+
+          currentDate = addDays(currentDate, 1)
+        }
       }
-      acc[monthKey].earnings += dailyEarnings;
-      acc[monthKey].days += 1;
-      return acc;
-    }, {});
+    })
 
-    return Object.entries(monthlyData).map(([month, data]: [string, any]) => ({
-      month,
-      earnings: Number((data.earnings / data.days).toFixed(4))
-    }));
-  };
+    // Convert map to array and sort by date
+    return Array.from(dateMap.values())
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+      .map((item) => ({
+        ...item,
+        earnings: Number(item.earnings.toFixed(4)),
+        tvl: Number(item.tvl.toFixed(4)),
+      }))
+  }
 
   // Calculate performance metrics
   const calculateMetrics = () => {
-    const monthlyReturn = dailyYield * 30;
-    const annualizedReturn = dailyYield * 365;
-    const roi = totalStaked > 0 ? (totalEarned / totalStaked) * 100 : 0;
+    const monthlyReturn = dailyYield * 30
+    const annualizedReturn = dailyYield * 365
+    const roi = totalStaked > 0 ? (totalEarned / totalStaked) * 100 : 0
 
     return {
       monthlyReturn,
       annualizedReturn,
-      roi
-    };
-  };
+      roi,
+    }
+  }
 
-  const historicalData = generateHistoricalData();
-  const monthlyData = generateMonthlyData();
-  const metrics = calculateMetrics();
+  const historicalData = generateHistoricalData()
+  const metrics = calculateMetrics()
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="space-y-8"
-    >
+    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold">Staking Analytics</h2>
         <div className="flex items-center space-x-4">
@@ -114,9 +131,7 @@ export function StakingAnalytics({ stakes, ethPrice }: StakingAnalyticsProps) {
               <option value="all">All time</option>
             </select>
           </div>
-          <div className="text-sm text-slate-400">
-            Last updated: {format(new Date(), 'MMM dd, yyyy HH:mm')}
-          </div>
+          <div className="text-sm text-slate-400">Last updated: {format(new Date(), "MMM dd, yyyy HH:mm")}</div>
         </div>
       </div>
 
@@ -195,11 +210,11 @@ export function StakingAnalytics({ stakes, ethPrice }: StakingAnalyticsProps) {
               <YAxis stroke="#64748b" />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#1f2937',
-                  border: '1px solid #374151',
-                  borderRadius: '0.5rem'
+                  backgroundColor: "#1f2937",
+                  border: "1px solid #374151",
+                  borderRadius: "0.5rem",
                 }}
-                labelStyle={{ color: '#94a3b8' }}
+                labelStyle={{ color: "#94a3b8" }}
               />
               <Area
                 type="monotone"
@@ -231,52 +246,43 @@ export function StakingAnalytics({ stakes, ethPrice }: StakingAnalyticsProps) {
               <YAxis stroke="#64748b" />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#1f2937',
-                  border: '1px solid #374151',
-                  borderRadius: '0.5rem'
+                  backgroundColor: "#1f2937",
+                  border: "1px solid #374151",
+                  borderRadius: "0.5rem",
                 }}
-                labelStyle={{ color: '#94a3b8' }}
+                labelStyle={{ color: "#94a3b8" }}
               />
-              <Area
-                type="monotone"
-                dataKey="tvl"
-                name="TVL"
-                stroke="#8b5cf6"
-                fillOpacity={1}
-                fill="url(#colorTVL)"
-              />
+              <Area type="monotone" dataKey="tvl" name="TVL" stroke="#8b5cf6" fillOpacity={1} fill="url(#colorTVL)" />
             </AreaChart>
           </ResponsiveContainer>
         </div>
       </div>
 
-      {/* Monthly Performance */}
-      <div className="bg-slate-800/50 backdrop-blur-xl rounded-xl p-6 border border-slate-700/50">
-        <h3 className="text-lg font-bold mb-6">Monthly Performance</h3>
-        <div className="h-[300px]">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={monthlyData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1f2937" />
-              <XAxis dataKey="month" stroke="#64748b" />
-              <YAxis stroke="#64748b" />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: '#1f2937',
-                  border: '1px solid #374151',
-                  borderRadius: '0.5rem'
-                }}
-                labelStyle={{ color: '#94a3b8' }}
-              />
-              <Bar
-                dataKey="earnings"
-                name="Average Daily Earnings"
-                fill="#3b82f6"
-                radius={[4, 4, 0, 0]}
-              />
-            </BarChart>
-          </ResponsiveContainer>
+      
+      {/* Monthly Performance Chart */}
+      {monthlyEarnings && monthlyEarnings.length > 0 && (
+        <div className="bg-slate-800/50 backdrop-blur-xl rounded-xl p-6 border border-slate-700/50">
+          <h3 className="text-lg font-bold mb-6">Monthly Performance</h3>
+          <div className="h-[300px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={monthlyEarnings}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#1f2937" />
+                <XAxis dataKey="month" stroke="#64748b" />
+                <YAxis stroke="#64748b" />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#1f2937",
+                    border: "1px solid #374151",
+                    borderRadius: "0.5rem",
+                  }}
+                  labelStyle={{ color: "#94a3b8" }}
+                />
+                <Bar dataKey="earnings" name="Monthly Earnings" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Performance Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -293,7 +299,7 @@ export function StakingAnalytics({ stakes, ethPrice }: StakingAnalyticsProps) {
             </div>
             <div className="flex justify-between items-center">
               <span className="text-slate-400">Daily APR</span>
-              <span>{(dailyYield / totalStaked * 100).toFixed(2)}%</span>
+              <span>{((dailyYield / totalStaked) * 100).toFixed(2)}%</span>
             </div>
           </div>
         </div>
@@ -311,7 +317,7 @@ export function StakingAnalytics({ stakes, ethPrice }: StakingAnalyticsProps) {
             </div>
             <div className="flex justify-between items-center">
               <span className="text-slate-400">Monthly APR</span>
-              <span>{(metrics.monthlyReturn / totalStaked * 100).toFixed(2)}%</span>
+              <span>{((metrics.monthlyReturn / totalStaked) * 100).toFixed(2)}%</span>
             </div>
           </div>
         </div>
@@ -329,11 +335,12 @@ export function StakingAnalytics({ stakes, ethPrice }: StakingAnalyticsProps) {
             </div>
             <div className="flex justify-between items-center">
               <span className="text-slate-400">APY</span>
-              <span>{(metrics.annualizedReturn / totalStaked * 100).toFixed(2)}%</span>
+              <span>{((metrics.annualizedReturn / totalStaked) * 100).toFixed(2)}%</span>
             </div>
           </div>
         </div>
       </div>
     </motion.div>
-  );
+  )
 }
+
