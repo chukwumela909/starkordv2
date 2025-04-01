@@ -16,6 +16,8 @@ import { PriceHeader } from './components/PriceHeader';
 import { ForgotPassword } from './components/ForgotPassword';
 import { Profile } from './components/Profile';
 import { Support } from './components/Support';
+import { Terms } from './components/Terms';
+import { PrivacyPolicy } from './components/Privacy';
 
 // function ProtectedRoute({ children }: { children: React.ReactNode }) {
 //   const { user, loading } = useAuthStore();
@@ -78,6 +80,8 @@ function App() {
             <Route path="support" element={<Support />} />
             <Route path="forgotPassword" element={<ForgotPassword />} />
             <Route path="blog" element={<Blog />} />
+            <Route path="terms-and-conditions" element={<Terms />} />
+            <Route path="privacy-policy" element={<PrivacyPolicy />} />
             <Route path="blog/:id" element={<ArticlePage />} />
             <Route path="login" element={!user ? <Auth /> : <Navigate to="/dashboard" replace />} />
           </Route>

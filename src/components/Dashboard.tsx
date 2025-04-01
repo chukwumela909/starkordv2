@@ -26,7 +26,6 @@ import {
   Target,
   BarChart3,
   User,
-  Settings,
   Diamond
 } from 'lucide-react';
 import { useUserStore } from '../store/userStore';
@@ -259,17 +258,17 @@ export function Dashboard() {
             <p className="text-sm text-slate-400 mt-1">Welcome back, {user?.name}</p>
           </div>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex flex-col mb-2 md:flex-row justify-center  items-center space-x-4">
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => navigate('/profile')}
-              className="z-50 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg flex items-center space-x-2 text-sm transition-colors"
+              className="z-50 mb-2 md:mb-0 ml-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg flex items-center space-x-2 text-sm transition-colors"
             >
               <User className="w-4 h-4" />
               <span>Profile</span>
             </motion.button>
-            <motion.button
+            {/* <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => navigate('/support')}
@@ -277,7 +276,7 @@ export function Dashboard() {
             >
               <Settings className="w-4 h-4" />
               <span>Support</span>
-            </motion.button>
+            </motion.button> */}
             <button
               onClick={handleLogout}
               className="z-50 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg flex items-center space-x-2 text-sm transition-colors"
@@ -300,7 +299,7 @@ export function Dashboard() {
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-sm font-medium text-slate-400">Total Staked</p>
-                <p className="text-2xl font-bold">{user?.total_staked} ETH</p>
+                <p className="text-2xl font-bold">{Number(user?.total_staked).toFixed(4)} ETH</p>
                 <p className="text-sm text-slate-400">≈ ${totalStakedUSD.toLocaleString()}</p>
               </div>
               <div className="bg-blue-500/20 p-2 rounded-lg">
@@ -396,7 +395,7 @@ export function Dashboard() {
                             whileHover={{ scale:  1.05 }}
                             whileTap={{ scale:  0.95 }}
                             onClick={() => handleRestakeClick(stake.id)}
-                            disabled={false}
+                            
                             className="px-4 py-2 bg-green-500 text-white rounded-lg flex items-center space-x-2 text-sm hover:bg-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                           >
                             <RefreshCw className={`w-4 h-4 ${actionLoading === stake.id + '_restake' ? 'animate-spin' : ''}`} />
@@ -407,7 +406,7 @@ export function Dashboard() {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={() => handleUnstakeClick(stake)}
-                            disabled={stake.can_unstake == "0"}
+                           
                             className="px-4 py-2 bg-red-500 text-white rounded-lg flex items-center space-x-2 text-sm hover:bg-red-600 transition-colors disabled:opacity-50"
                           >
                             <LogOut className="w-4 h-4" />

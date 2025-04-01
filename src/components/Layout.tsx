@@ -1,9 +1,10 @@
 import React from 'react';
-import { Outlet, Link, useLocation } from 'react-router-dom';
+import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Wallet, Menu, X } from 'lucide-react';
-import { LanguageSelector } from './LanguageSelector';
-import { ThemeToggle } from './ThemeToggle';
+import {  Menu, X } from 'lucide-react';
+import logo from '../../images/starkordMainLogo.png';
+
+
 
 export function Layout() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -17,16 +18,15 @@ export function Layout() {
     { path: '/blog', label: 'Blog' },
   ];
 
+  const navigate = useNavigate();
+
   return (
     <div className=" min-h-screen flex flex-col">
       <header className="relative z-50">
         <nav className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center space-x-2">
-              <Wallet className="w-8 h-8 text-blue-400" />
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Starkord
-              </span>
+            <img src={logo} alt="logo" className="w-24 md:w-32" />
             </Link>
 
             {/* Desktop Navigation */}
@@ -44,10 +44,10 @@ export function Layout() {
                   {item.label}
                 </Link>
               ))}
-              <div className="flex items-center space-x-2">
-                <LanguageSelector />
-                <ThemeToggle />
+              <div className="flex items-center space-x-4">
+            
               </div>
+              
               <Link
                 to="/login"
                 className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm transition-colors"
@@ -55,11 +55,13 @@ export function Layout() {
                 Login
               </Link>
             </div>
-
+            
             {/* Mobile Menu Button */}
-            <div className="md:hidden flex items-center space-x-2">
-              <LanguageSelector />
-              <ThemeToggle />
+            <div className="md:hidden flex items-center space-x-3">
+       
+          
+         
+            
               <button
                 className="text-slate-300 hover:text-white"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -92,6 +94,7 @@ export function Layout() {
                     {item.label}
                   </Link>
                 ))}
+                 
                 <Link
                   to="/login"
                   onClick={() => setIsMenuOpen(false)}
@@ -113,10 +116,9 @@ export function Layout() {
         <div className="container mx-auto px-4 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="flex items-center space-x-2">
-              <Wallet className="w-6 h-6 text-blue-400" />
-              <span className="text-lg font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Starkord
-              </span>
+            <Link to="/" className="flex items-center space-x-2">
+              <img src={logo} alt="logo" className="w-24 md:w-32" />
+            </Link>
             </div>
             <div className="flex items-center space-x-6">
               {navItems.map((item) => (
@@ -132,6 +134,25 @@ export function Layout() {
           </div>
           <div className="mt-8 text-center text-sm text-slate-400">
             © {new Date().getFullYear()} Starkord. All rights reserved.
+            <div className="mt-4 text-center">
+              <button
+                onClick={() => {
+                  navigate("/terms-and-conditions")
+                }}
+                className="text-blue-400 hover:text-blue-300 hover:underline text-sm px-3 py-1 rounded transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
+              >
+                Terms of Service
+              </button>
+              <span className="mx-2 text-slate-400">|</span>
+              <button
+                onClick={() => {
+                  navigate("/privacy-policy")
+                }}
+                className="text-blue-400 hover:text-blue-300 hover:underline text-sm px-3 py-1 rounded transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
+              >
+                Privacy Policy
+              </button>
+            </div>
           </div>
         </div>
       </footer>

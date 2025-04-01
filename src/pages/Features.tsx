@@ -53,10 +53,6 @@ export function Features() {
         'Stake for 60 days & get 0.05% bonus yield monthly (up to 1%)',
         'NEW: Welcome bonus: +0.1% for first 7 days',
         'NEW: Loyalty rewards program',
-        'NEW: Free gas fee on first withdrawal',
-        'NEW: Stake insurance protection',
-        'NEW: Referral bonus multiplier',
-        'NEW: Early access to new plans'
       ],
       highlight: 'Best for new investors'
     },

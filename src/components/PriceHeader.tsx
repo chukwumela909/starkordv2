@@ -1,10 +1,11 @@
 import  { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { TrendingUp, TrendingDown, RefreshCw } from 'lucide-react';
+import { TrendingUp, TrendingDown, } from 'lucide-react';
 import { usePriceStore } from '../store/priceStore';
+import Scripter from './Scripter';
 
 export function PriceHeader() {
-  const { ethPrice, priceChange24h, lastUpdate,  startPriceUpdates, stopPriceUpdates } = usePriceStore();
+  const { ethPrice, priceChange24h,   startPriceUpdates, stopPriceUpdates } = usePriceStore();
 
   useEffect(() => {
     startPriceUpdates();
@@ -41,12 +42,13 @@ export function PriceHeader() {
             </div>
           </div>
           
-          {lastUpdate && (
+          {/* {lastUpdate && (
             <div className="flex items-center text-sm text-slate-400">
               <RefreshCw className="w-4 h-4 mr-2" />
               Last updated: {lastUpdate.toLocaleTimeString()}
             </div>
-          )}
+          )} */}
+          <Scripter /> {/* *** RENDER ONCE - Desktop Position *** */}
         </div>
       </div>
     </div>

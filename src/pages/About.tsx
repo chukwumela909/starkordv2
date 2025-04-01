@@ -22,6 +22,9 @@ import {
   Blocks,
 
 } from 'lucide-react';
+import img1 from '../../images/IMG_5346.jpg';
+import img2 from '../../images/IMG_5349.jpg';
+import img3 from '../../images/IMG_5353.jpg';
 
 export function About() {
   return (
@@ -233,7 +236,7 @@ export function About() {
             {
               name: 'Sarah Chen',
               role: 'CEO & Founder',
-              image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300',
+              image: img1,
               description: 'Blockchain pioneer with 10+ years in DeFi',
               achievements: ['Former CTO at BlockTech', 'MIT Blockchain Research', 'DeFi Security Expert'],
               color: 'from-blue-500/20 to-purple-500/20'
@@ -241,7 +244,7 @@ export function About() {
             {
               name: 'Michael Rodriguez',
               role: 'CTO',
-              image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300',
+              image: img2,
               description: 'Security expert and blockchain architect',
               achievements: ['15+ Years in Cybersecurity', 'Ethereum Core Contributor', 'Security Protocol Designer'],
               color: 'from-purple-500/20 to-pink-500/20'
@@ -249,7 +252,7 @@ export function About() {
             {
               name: 'Emily Thompson',
               role: 'Head of Security',
-              image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300',
+              image: img3,
               description: 'Cybersecurity specialist and risk manager',
               achievements: ['CISSP Certified', 'Former Security Lead at Major Exchange', 'Risk Management Expert'],
               color: 'from-green-500/20 to-emerald-500/20'

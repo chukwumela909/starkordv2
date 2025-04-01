@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area, BarChart, Bar } from "recharts"
-import { TrendingUp, ChevronUp, DollarSign, Wallet, Award, Filter } from "lucide-react"
+import {  Filter } from "lucide-react"
 import { format, addDays, subDays } from "date-fns"
 
 // Update the Stake interface to match the provided data structure
@@ -136,7 +136,7 @@ export function StakingAnalytics({ stakes, ethPrice, monthlyEarnings = [] }: Sta
       </div>
 
       {/* Performance Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <div className="bg-slate-800/50 backdrop-blur-xl rounded-xl p-6 border border-slate-700/50 hover:border-blue-500/50 transition-all duration-200">
           <div className="flex items-start justify-between">
             <div>
@@ -191,7 +191,7 @@ export function StakingAnalytics({ stakes, ethPrice, monthlyEarnings = [] }: Sta
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Historical Performance Chart */}
       <div className="bg-slate-800/50 backdrop-blur-xl rounded-xl p-6 border border-slate-700/50">

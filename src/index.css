@@ -194,3 +194,120 @@
   backface-visibility: hidden;
   perspective: 1000px;
 }
+
+/* --- Google Translate Widget Styling --- */
+
+/* Style the container div */
+#google_translate_element {
+  /* Example: Add some padding and a border */
+  /* padding: 0.5rem; */
+  /* border: 1px solid #ccc; */
+  /* border-radius: 4px; */
+  display: inline-block; /* Or block, depending on layout needs */
+  position: relative; /* Needed for custom arrow positioning */
+  /* margin-top: 10px; */
+}
+
+/* Target the main select dropdown element injected by Google */
+/* This class might change - inspect the element if it breaks */
+.goog-te-combo {
+  /* Reset default browser styles and Google's styles */
+  appearance: none; /* Remove default dropdown arrow */
+  -webkit-appearance: none; /* For Safari/Chrome */
+  -moz-appearance: none; /* For Firefox */
+  background-color: #0F1626; 
+  border: 1px solid #0F1626; 
+  border-radius: 0.375rem; /* Medium rounded corners (like Tailwind's rounded-md) */
+  padding: 0.5rem 2.5rem 0.5rem 0.75rem; /* top/bottom, right (for arrow), left */
+  font-size: 1rem; /* Small font size (like Tailwind's text-sm) */
+  line-height: 1.25rem; /* (like Tailwind's leading-5) */
+  color: #ffffffa1; /* Dark gray text (like Tailwind's gray-800) */
+  cursor: pointer;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  /* Ensure it takes necessary width or set a specific width */
+  /* width: 100%; or width: 200px; */
+}
+
+/* Style on hover/focus */
+.goog-te-combo:hover {
+  border-color: #0F1626; /* Medium gray border (like Tailwind's gray-400) */
+  color: #fff; /* Dark gray text (like Tailwind's gray-800) */
+
+}
+
+.goog-te-combo:focus {
+  outline: none; /* Remove default focus outline */
+  border-color: #3b82f6; /* Blue border on focus (like Tailwind's blue-500) */
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4); /* Blue ring shadow */
+}
+
+/* Add a custom dropdown arrow using a pseudo-element */
+#google_translate_element::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0.75rem; /* Position inside the padding */
+  width: 0.5rem; /* Arrow size */
+  height: 0.5rem; /* Arrow size */
+  background-color: transparent; /* Arrow color (like Tailwind's gray-500) */
+  clip-path: polygon(100% 0%, 0 0%, 50% 100%); /* Create downward triangle */
+  transform: translateY(-50%);
+  pointer-events: none; /* Allow clicks to pass through to the select */
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Change arrow color on hover (optional) */
+#google_translate_element:hover::after {
+   background-color: transparent; /* Darker gray on hover */
+}
+
+
+/* --- Hiding Google Branding --- */
+
+/* Hide the "Powered by Google Translate" attribution */
+/* This is the element Google often uses, but inspect if it doesn't work */
+.goog-logo-link,
+.goog-te-gadget span[style*="text-decoration: none;"] /* More specific selector sometimes needed */
+ {
+  display: none !important;
+  visibility: hidden !important; /* Extra measure */
+  opacity: 0 !important; /* Extra measure */
+  height: 0 !important; /* Collapse space */
+  width: 0 !important;  /* Collapse space */
+  margin: 0 !important; /* Remove margins */
+  padding: 0 !important; /* Remove padding */
+}
+
+/* Hide the Google Translate banner frame that can appear at the top */
+.goog-te-banner-frame {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Google often adds 'top' style to the body when the banner shows. Override it. */
+body {
+  top: 0 !important;
+}
+
+/* Sometimes Google wraps the select in a div. Adjust container height if needed. */
+.goog-te-gadget {
+  font-size: 0 !important; /* Prevent extra space from text nodes */
+  line-height: 0 !important; /* Prevent extra space */
+}
+
+/* Ensure the container itself doesn't have unwanted margins/padding */
+#google_translate_element .skiptranslate {
+   margin: 0 !important;
+   padding: 0 !important;
+   /* You might need to adjust vertical alignment if the container adds space */
+   vertical-align: middle; /* Or top, bottom */
+}
+
+.VIpgJd-ZVi9od-l4eHX-hSRGPd{
+  display: none;
+}

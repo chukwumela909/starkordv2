@@ -11,6 +11,7 @@ interface User {
     referral_code: string;
     referral_rewards: number;
     total_referrals: string;
+    created_at: string;
     active_referrals: string;
     daily_returns: {
         amount: number;
