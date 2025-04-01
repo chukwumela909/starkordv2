@@ -213,7 +213,7 @@ export function Dashboard() {
     setWithdrawrefModalOpen(true);
   };
 
- 
+
 
 
 
@@ -222,7 +222,7 @@ export function Dashboard() {
   const totalRewardsUSD = (user?.total_rewards ?? 0) * ethPrice;
   const dailyRewardsUSD = (user?.daily_rewards ?? 0) * ethPrice;
 
-  if(loading){
+  if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 border-solid"></div>
@@ -365,6 +365,7 @@ export function Dashboard() {
                 const startDate = new Date(stake.staked_at);
                 const daysSinceStart = Math.floor((new Date().getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
                 const daysRemaining = calculateRemainingDaysCustomFormat(stake.staked_at, Number(stake.lock_period_days));
+                const daysRemainingBonusAct = calculateRemainingDaysCustomFormat(stake.staked_at, Number(60));
 
                 return (
                   <motion.div
@@ -392,10 +393,10 @@ export function Dashboard() {
                         </div>
                         <div className="flex space-x-2">
                           <motion.button
-                            whileHover={{ scale:  1.05 }}
-                            whileTap={{ scale:  0.95 }}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                             onClick={() => handleRestakeClick(stake.id)}
-                            
+
                             className="px-4 py-2 bg-green-500 text-white rounded-lg flex items-center space-x-2 text-sm hover:bg-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                           >
                             <RefreshCw className={`w-4 h-4 ${actionLoading === stake.id + '_restake' ? 'animate-spin' : ''}`} />
@@ -406,7 +407,7 @@ export function Dashboard() {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={() => handleUnstakeClick(stake)}
-                           
+
                             className="px-4 py-2 bg-red-500 text-white rounded-lg flex items-center space-x-2 text-sm hover:bg-red-600 transition-colors disabled:opacity-50"
                           >
                             <LogOut className="w-4 h-4" />
@@ -451,28 +452,20 @@ export function Dashboard() {
                           <p className="text-sm text-blue-500">≈ ${(Number(stake.earnings) * ethPrice).toLocaleString()}</p>
                         </div>
                         <div>
-                          <p className="text-sm text-slate-400">Next Yield Increase</p>
-                          <div className="flex items-center space-x-2">
-                            {
-                              daysRemaining != 0 ? (
-                                <p className="text-lg font-bold">{daysRemaining} days</p>
+                          <div>
+                            <p className="text-sm text-slate-400">Next Yield Increase</p>
+                            <div className="flex items-center space-x-2">
+                              {daysRemainingBonusAct > 0 ? (
+                                <p className="text-lg font-bold">{daysRemainingBonusAct} days</p>
                               ) : (
                                 <p className="text-lg font-bold">Activated</p>
-                              )
-                            }
-                           
-                            {/* {stake.bonus_activated && (
-                              <span title="Monthly Increase">
-                                <ChevronUp className="w-4 h-4 text-green-400" />
-                              </span>
-                            )} */}
+                              )}
+                            </div>
+                            {daysRemainingBonusAct > 0 && (
+                              <p className="text-sm text-slate-400">Until bonus activation</p>
+                            )}
                           </div>
-                          {/* <p className="text-sm text-slate-400">
-                            {stake.bonus_activated 
-                              ? 'Until monthly increase'
-                              : 'Until bonus activation'
-                            }
-                          </p> */}
+
                         </div>
                       </div>
 
@@ -644,8 +637,8 @@ export function Dashboard() {
         </motion.div>
 
         <div className="analytics-section">
-        {user?.stakes ? (
-             <StakingAnalytics stakes={user.stakes} ethPrice={ethPrice} monthlyEarnings={user.monthly_earnings} />
+          {user?.stakes ? (
+            <StakingAnalytics stakes={user.stakes} ethPrice={ethPrice} monthlyEarnings={user.monthly_earnings} />
           ) : (
             <div className="bg-slate-800/50 backdrop-blur-xl rounded-xl p-6 border border-slate-700/50 text-center">
               <p className="text-slate-400">No staking data available</p>
