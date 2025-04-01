@@ -3,7 +3,18 @@
 import type React from "react"
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import { ArrowUpRight, ArrowDownLeft, Clock, CheckCircle2, XCircle, Download, Search, Loader2 } from "lucide-react"
+import {
+  ArrowUpRight,
+  ArrowDownLeft,
+  Clock,
+  CheckCircle2,
+  XCircle,
+  Download,
+  Search,
+  Loader2,
+  ChevronDown,
+  ChevronUp,
+} from "lucide-react"
 import axios from "axios"
 
 interface Transaction {
@@ -26,6 +37,10 @@ export function TransactionHistory() {
   const [error, setError] = useState<string | null>(null)
   const [searchTerm, setSearchTerm] = useState("")
   const [filterType, setFilterType] = useState("all")
+  const [showAllTransactions, setShowAllTransactions] = useState(false)
+
+  // Number of transactions to show initially
+  const transactionsLimit = 10
 
   useEffect(() => {
     fetchTransactions()
@@ -111,10 +126,14 @@ export function TransactionHistory() {
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value)
+    // Reset to showing limited transactions when search changes
+    setShowAllTransactions(false)
   }
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFilterType(e.target.value)
+    // Reset to showing limited transactions when filter changes
+    setShowAllTransactions(false)
   }
 
   const filteredTransactions = transactions.filter((tx) => {
@@ -127,6 +146,11 @@ export function TransactionHistory() {
 
     return matchesSearch && matchesFilter
   })
+
+  // Get limited transactions or all based on state
+  const displayedTransactions = showAllTransactions
+    ? filteredTransactions
+    : filteredTransactions.slice(0, transactionsLimit)
 
   const handleExport = () => {
     // Create CSV content
@@ -150,6 +174,11 @@ export function TransactionHistory() {
 
   const refreshTransactions = () => {
     fetchTransactions()
+    setShowAllTransactions(false)
+  }
+
+  const toggleShowAllTransactions = () => {
+    setShowAllTransactions(!showAllTransactions)
   }
 
   return (
@@ -250,44 +279,68 @@ export function TransactionHistory() {
             </p>
           </div>
         ) : (
-          <table className="w-full">
-            <thead>
-              <tr className="bg-slate-900/50">
-                <th className="px-6 py-4 text-left text-sm font-medium text-slate-400">Type</th>
-                <th className="px-6 py-4 text-left text-sm font-medium text-slate-400">Amount</th>
-                <th className="px-6 py-4 text-left text-sm font-medium text-slate-400">Status</th>
-                <th className="px-6 py-4 text-left text-sm font-medium text-slate-400">Date</th>
-                <th className="px-6 py-4 text-left text-sm font-medium text-slate-400">Transaction ID</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredTransactions.map((tx) => (
-                <tr key={tx.id} className="border-t border-slate-700/50 hover:bg-slate-700/20 transition-colors">
-                  <td className="px-6 py-4">
-                    <div className="flex items-center space-x-2">
-                      {getTransactionTypeIcon(tx.type)}
-                      {getTransactionTypeLabel(tx.type)}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <span className="font-medium">{tx.amount} ETH</span>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center space-x-2">
-                      {getStatusIcon(tx.status)}
-                      <span className="capitalize">{tx.status}</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 text-slate-400">{new Date(tx.date).toLocaleString()}</td>
-                  <td className="px-6 py-4">
-                    <span className="text-slate-400 truncate block max-w-[200px]" title={tx.id}>
-                      {tx.id}
-                    </span>
-                  </td>
+          <>
+            <table className="w-full">
+              <thead>
+                <tr className="bg-slate-900/50">
+                  <th className="px-6 py-4 text-left text-sm font-medium text-slate-400">Type</th>
+                  <th className="px-6 py-4 text-left text-sm font-medium text-slate-400">Amount</th>
+                  <th className="px-6 py-4 text-left text-sm font-medium text-slate-400">Status</th>
+                  <th className="px-6 py-4 text-left text-sm font-medium text-slate-400">Date</th>
+                  <th className="px-6 py-4 text-left text-sm font-medium text-slate-400">Transaction ID</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {displayedTransactions.map((tx) => (
+                  <tr key={tx.id} className="border-t border-slate-700/50 hover:bg-slate-700/20 transition-colors">
+                    <td className="px-6 py-4">
+                      <div className="flex items-center space-x-2">
+                        {getTransactionTypeIcon(tx.type)}
+                        {getTransactionTypeLabel(tx.type)}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className="font-medium">{tx.amount} ETH</span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="flex items-center space-x-2">
+                        {getStatusIcon(tx.status)}
+                        <span className="capitalize">{tx.status}</span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-slate-400">{new Date(tx.date).toLocaleString()}</td>
+                    <td className="px-6 py-4">
+                      <span className="text-slate-400 truncate block max-w-[200px]" title={tx.id}>
+                        {tx.id}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            {/* Show "View More" button only if there are more than 10 transactions */}
+            {filteredTransactions.length > transactionsLimit && (
+              <div className="flex justify-center p-4 border-t border-slate-700/50">
+                <button
+                  onClick={toggleShowAllTransactions}
+                  className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg flex items-center space-x-2 text-sm transition-colors"
+                >
+                  {showAllTransactions ? (
+                    <>
+                      <ChevronUp className="w-4 h-4" />
+                      <span>Show Less</span>
+                    </>
+                  ) : (
+                    <>
+                      <ChevronDown className="w-4 h-4" />
+                      <span>View All ({filteredTransactions.length} Transactions)</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
     </motion.div>

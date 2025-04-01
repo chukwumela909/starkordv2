@@ -234,7 +234,7 @@ export function About() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
             {
-              name: 'Sarah Chen',
+              name: 'Petro Kucher',
               role: 'CEO & Founder',
               image: img1,
               description: 'Blockchain pioneer with 10+ years in DeFi',
@@ -250,7 +250,7 @@ export function About() {
               color: 'from-purple-500/20 to-pink-500/20'
             },
             {
-              name: 'Emily Thompson',
+              name: 'Lia Kusari',
               role: 'Head of Security',
               image: img3,
               description: 'Cybersecurity specialist and risk manager',
