@@ -25,7 +25,8 @@ import {
   Crown,
   Target,
   User,
-  Diamond
+  Diamond,
+  BarChart3
 } from 'lucide-react';
 import { useUserStore } from '../store/userStore';
 import { RestakeModal } from './RestakeModal';
@@ -510,17 +511,17 @@ export function Dashboard() {
                                   </p>
                                 </div>
                               </div>
-                              {/* <div className="flex items-center space-x-3">
+                              <div className="flex items-center space-x-3">
                                 <div className="bg-blue-500/20 p-2 rounded-lg">
                                   <BarChart3 className="w-4 h-4 text-blue-400" />
                                 </div>
                                 <div>
-                                  <p className="font-medium">Analytics</p>
+                                  <p className="font-medium">Temporary 30-Day boost</p>
                                   <p className="text-sm text-slate-400">
-                                    Real-time data access
+                                  +2.0% for 2+ deposit
                                   </p>
                                 </div>
-                              </div> */}
+                              </div>
                               <div className="flex items-center space-x-3">
                                 <div className="bg-purple-500/20 p-2 rounded-lg">
                                   <Star className="w-4 h-4 text-purple-400" />
