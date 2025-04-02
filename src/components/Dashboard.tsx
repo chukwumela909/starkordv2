@@ -365,7 +365,31 @@ export function Dashboard() {
                 const startDate = new Date(stake.staked_at);
                 const daysSinceStart = Math.floor((new Date().getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
                 const daysRemaining = calculateRemainingDaysCustomFormat(stake.staked_at, Number(stake.lock_period_days));
-                const daysRemainingBonusAct = calculateRemainingDaysCustomFormat(stake.staked_at, Number(60));
+                // const daysRemainingBonusAct = calculateRemainingDaysCustomFormat(stake.staked_at, Number(60));
+
+                // Calculate days remaining for bonus activation based on bonus_yield status
+                const calculateDaysRemainingForBonus = () => {
+                  if (stake.bonus_yield === "1") {
+                    // If bonus is already active, calculate days in the current 30-day cycle
+                    const bonusActivationDate = new Date(stake.staked_at)
+                    bonusActivationDate.setDate(bonusActivationDate.getDate() + 60) // Initial activation after 60 days
+
+                    const currentDate = new Date()
+                    const daysSinceActivation = Math.floor(
+                      (currentDate.getTime() - bonusActivationDate.getTime()) / (1000 * 60 * 60 * 24),
+                    )
+
+                    // Calculate days remaining in the current 30-day cycle
+                    // Ensure it's never 0 by using 30 when it would be 0
+                    const daysRemainingInCycle = daysSinceActivation % 30 === 0 ? 30 : 30 - (daysSinceActivation % 30)
+                    return daysRemainingInCycle
+                  } else {
+                    // If bonus is not yet active, count down from 60 days
+                    return calculateRemainingDaysCustomFormat(stake.staked_at, Number(60))
+                  }
+                }
+
+                const daysRemainingBonusAct = calculateDaysRemainingForBonus()
 
                 return (
                   <motion.div
@@ -380,16 +404,16 @@ export function Dashboard() {
                             <h3 className="text-xl font-bold">{activeStakesPlanMatch[stake.plan_id as keyof typeof activeStakesPlanMatch]}</h3>
                             <p className="text-sm text-slate-400">Started {new Date(stake.staked_at).toLocaleDateString()}</p>
                           </div>
-                          {activeStakesPlanMatch[stake.plan_id as keyof typeof activeStakesPlanMatch] === 'Elite Matrix' && (
+                          {/* {activeStakesPlanMatch[stake.plan_id as keyof typeof activeStakesPlanMatch] === 'Elite Matrix' && (
                             <div className="bg-emerald-500/20 px-2 py-1 rounded text-xs font-medium text-emerald-400">
                               Premium Analytics
                             </div>
-                          )}
-                          {activeStakesPlanMatch[stake.plan_id as keyof typeof activeStakesPlanMatch] === 'Legacy Protocol' && (
+                          )} */}
+                          {/* {activeStakesPlanMatch[stake.plan_id as keyof typeof activeStakesPlanMatch] === 'Legacy Protocol' && (
                             <div className="bg-amber-500/20 px-2 py-1 rounded text-xs font-medium text-amber-400">
                               Premium Tier
                             </div>
-                          )}
+                          )} */}
                         </div>
                         <div className="flex space-x-2">
                           <motion.button
@@ -455,15 +479,11 @@ export function Dashboard() {
                           <div>
                             <p className="text-sm text-slate-400">Next Yield Increase</p>
                             <div className="flex items-center space-x-2">
-                              {daysRemainingBonusAct > 0 ? (
-                                <p className="text-lg font-bold">{daysRemainingBonusAct} days</p>
-                              ) : (
-                                <p className="text-lg font-bold">Activated</p>
-                              )}
+                              <p className="text-lg font-bold">{daysRemainingBonusAct} days</p>
                             </div>
-                            {daysRemainingBonusAct > 0 && (
-                              <p className="text-sm text-slate-400">Until bonus activation</p>
-                            )}
+                            <p className="text-sm text-slate-400">
+                            {stake.bonus_yield === "1" ? "Until next yield increase" : "Until bonus activation"}
+                          </p>
                           </div>
 
                         </div>
@@ -491,7 +511,7 @@ export function Dashboard() {
                                   </p>
                                 </div>
                               </div>
-                              <div className="flex items-center space-x-3">
+                              {/* <div className="flex items-center space-x-3">
                                 <div className="bg-blue-500/20 p-2 rounded-lg">
                                   <BarChart3 className="w-4 h-4 text-blue-400" />
                                 </div>
@@ -501,7 +521,7 @@ export function Dashboard() {
                                     Real-time data access
                                   </p>
                                 </div>
-                              </div>
+                              </div> */}
                               <div className="flex items-center space-x-3">
                                 <div className="bg-purple-500/20 p-2 rounded-lg">
                                   <Star className="w-4 h-4 text-purple-400" />

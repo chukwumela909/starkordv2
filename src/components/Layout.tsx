@@ -153,7 +153,7 @@ export function Layout() {
               <img src={Xtwitter} alt="logo" className="w-6 md:w-6" />
               <span className="sr-only">X (formerly Twitter)</span>
             </a>
-            <a
+            {/* <a
               href="https://twitter.com/starkordpool"
               target="_blank"
               rel="noopener noreferrer"
@@ -166,7 +166,7 @@ export function Layout() {
               </div>
               
               <span className="sr-only">Telegram support</span>
-            </a>
+            </a> */}
             {/* Other social links */}
           </div>
           <div className="mt-8 text-center text-sm text-slate-400">
