@@ -176,6 +176,13 @@ export function UnstakeModal({ isOpen, onClose, stake, ethPrice }: UnstakeModalP
                 </div>
               </div>
 
+              <div className="flex justify-between items-center text-amber-400">
+                <span>Early Unstaking Penalty ({penaltyPercentage}%)</span>
+              </div>
+              <div className="flex justify-between items-center text-amber-400">
+                <span>Unstaking fee ({feePercentage}%)</span>
+              </div>
+
               <div className="space-y-4">
                 <label className="block text-slate-400">Amount to Unstake (ETH)</label>
                 <input

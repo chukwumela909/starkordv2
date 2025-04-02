@@ -613,7 +613,7 @@ export function Dashboard() {
                           <div className="flex items-center space-x-2 text-sm text-blue-400">
                             <Star className="w-4 h-4" />
                             <span>
-                              Maintain your stake for {daysRemaining} more days to activate bonus yield!
+                              Maintain your stake for {daysRemainingBonusAct} more days to activate bonus yield!
                             </span>
                           </div>
                         </div>

@@ -1,8 +1,10 @@
 import React from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import {  Menu, X } from 'lucide-react';
+import { Menu, X,  } from 'lucide-react';
 import logo from '../../images/starkordMainLogo.png';
+import telegram from '../../images/telegram.png';
+import Xtwitter from '../../images/x.png';
 
 
 
@@ -26,7 +28,7 @@ export function Layout() {
         <nav className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center space-x-2">
-            <img src={logo} alt="logo" className="w-24 md:w-32" />
+              <img src={logo} alt="logo" className="w-24 md:w-32" />
             </Link>
 
             {/* Desktop Navigation */}
@@ -35,19 +37,18 @@ export function Layout() {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`text-sm font-medium transition-colors ${
-                    location.pathname === item.path
-                      ? 'text-blue-400'
-                      : 'text-slate-300 hover:text-white'
-                  }`}
+                  className={`text-sm font-medium transition-colors ${location.pathname === item.path
+                    ? 'text-blue-400'
+                    : 'text-slate-300 hover:text-white'
+                    }`}
                 >
                   {item.label}
                 </Link>
               ))}
               <div className="flex items-center space-x-4">
-            
+
               </div>
-              
+
               <Link
                 to="/login"
                 className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-sm transition-colors"
@@ -55,13 +56,13 @@ export function Layout() {
                 Login
               </Link>
             </div>
-            
+
             {/* Mobile Menu Button */}
             <div className="md:hidden flex items-center space-x-3">
-       
-          
-         
-            
+
+
+
+
               <button
                 className="text-slate-300 hover:text-white"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -85,16 +86,15 @@ export function Layout() {
                     key={item.path}
                     to={item.path}
                     onClick={() => setIsMenuOpen(false)}
-                    className={`text-sm font-medium transition-colors ${
-                      location.pathname === item.path
-                        ? 'text-blue-400'
-                        : 'text-slate-300 hover:text-white'
-                    }`}
+                    className={`text-sm font-medium transition-colors ${location.pathname === item.path
+                      ? 'text-blue-400'
+                      : 'text-slate-300 hover:text-white'
+                      }`}
                   >
                     {item.label}
                   </Link>
                 ))}
-                 
+
                 <Link
                   to="/login"
                   onClick={() => setIsMenuOpen(false)}
@@ -116,9 +116,9 @@ export function Layout() {
         <div className="container mx-auto px-4 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="flex items-center space-x-2">
-            <Link to="/" className="flex items-center space-x-2">
-              <img src={logo} alt="logo" className="w-24 md:w-32" />
-            </Link>
+              <Link to="/" className="flex items-center space-x-2">
+                <img src={logo} alt="logo" className="w-24 md:w-32" />
+              </Link>
             </div>
             <div className="flex items-center space-x-6">
               {navItems.map((item) => (
@@ -131,6 +131,43 @@ export function Layout() {
                 </Link>
               ))}
             </div>
+          </div>
+          <div className="mt-6 flex justify-center space-x-6">
+            <a
+              href="https://t.me/starkordchannel"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-blue-400 transition-colors"
+              title="Telegram Channel"
+            >
+              <img src={telegram} alt="logo" className="w-6 md:w-6" />
+              <span className="sr-only">Telegram Channel</span>
+            </a>
+            <a
+              href="https://twitter.com/starkordpool"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-blue-400 transition-colors"
+              title="X (formerly Twitter)"
+            >
+              <img src={Xtwitter} alt="logo" className="w-6 md:w-6" />
+              <span className="sr-only">X (formerly Twitter)</span>
+            </a>
+            <a
+              href="https://twitter.com/starkordpool"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-blue-400 transition-colors"
+              title="Telegram support"
+            >
+              <div className='flex'>
+                <img src={telegram} alt="logo" className="w-6 md:w-6 mr-1" />
+              <p>(support)</p>
+              </div>
+              
+              <span className="sr-only">Telegram support</span>
+            </a>
+            {/* Other social links */}
           </div>
           <div className="mt-8 text-center text-sm text-slate-400">
             © {new Date().getFullYear()} Starkord. All rights reserved.

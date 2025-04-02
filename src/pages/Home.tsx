@@ -545,7 +545,7 @@ export default function Home() {
               href="https://calendly.com/starkord"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex mr-5 items-center px-8 py-4 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white rounded-xl font-medium transition-all duration-200 group"
+              className="inline-flex mr-5 mb-3 items-center px-8 py-4 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white rounded-xl font-medium transition-all duration-200 group"
             >
               <span>Book Your Free Call</span>
               <ArrowUpRight className="ml-2 w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

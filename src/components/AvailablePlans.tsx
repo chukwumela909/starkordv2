@@ -62,7 +62,7 @@ const FEATURES_MAP: Record<string, string[]> = {
     "30-day Unstake Window",
     "Early unstake penalty: 10%",
     "No compounding available",
-    "Stake for 60 days & get 0.05% bonus yield monthly (up to 1%)",
+    "Stake for 60 days & get 0.1% bonus yield monthly (up to 1%)",
     "NEW: Welcome bonus: +0.1% for first 7 days",
     "NEW: Loyalty rewards program",
   ],
