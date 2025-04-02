@@ -26,7 +26,8 @@ import {
   Target,
   User,
   Diamond,
-  BarChart3
+  BarChart3,
+  ChevronUp
 } from 'lucide-react';
 import { useUserStore } from '../store/userStore';
 import { RestakeModal } from './RestakeModal';
@@ -480,10 +481,11 @@ export function Dashboard() {
                             <p className="text-sm text-slate-400">Next Yield Increase</p>
                             <div className="flex items-center space-x-2">
                               <p className="text-lg font-bold">{daysRemainingBonusAct} days</p>
+                              {stake.bonus_yield === "1" ? <ChevronUp className="w-4 h-4 text-blue-400"  /> : <></> }
                             </div>
                             <p className="text-sm text-slate-400">
-                            {stake.bonus_yield === "1" ? "Until next yield increase" : "Until bonus activation"}
-                          </p>
+                              {stake.bonus_yield === "1" ? "Until next yield increase" : "Until bonus activation"}
+                            </p>
                           </div>
 
                         </div>
@@ -518,7 +520,7 @@ export function Dashboard() {
                                 <div>
                                   <p className="font-medium">Temporary 30-Day boost</p>
                                   <p className="text-sm text-slate-400">
-                                  +2.0% for 2+ deposit
+                                    +2.0% for 2+ deposit
                                   </p>
                                 </div>
                               </div>
