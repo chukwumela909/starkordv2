@@ -24,7 +24,6 @@ import {
   Zap,
   Crown,
   Target,
-  BarChart3,
   User,
   Diamond
 } from 'lucide-react';
