@@ -18,7 +18,7 @@ import {
   X,
   ArrowRight,
 } from "lucide-react"
-import { usePriceStore } from "../store/priceStore"
+// import { usePriceStore } from "../store/priceStore"
 import { useInvestmentStore } from "../store/investmentStore"
 import axios from "axios"
 import { useNotificationStore } from "../store/notificationStore"
@@ -115,7 +115,7 @@ const FEATURES_MAP: Record<string, string[]> = {
 }
 
 export function AvailablePlans({ onStake, actionLoading }: AvailablePlansProps) {
-  const { ethPrice } = usePriceStore()
+  // const { ethPrice } = usePriceStore()
   const { plans, loading, error, fetchPlans } = useInvestmentStore()
   const [selectedPlan, setSelectedPlan] = useState<any>(null)
   const [showCurrencyModal, setShowCurrencyModal] = useState(false)

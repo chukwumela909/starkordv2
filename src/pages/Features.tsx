@@ -31,10 +31,10 @@ import {
 
 
 } from 'lucide-react';
-import { usePriceStore } from '../store/priceStore';
+// import { usePriceStore } from '../store/priceStore';
 
 export function Features() {
-  const { ethPrice } = usePriceStore();
+  // const { ethPrice } = usePriceStore();
 
   const PLANS = [
     {
