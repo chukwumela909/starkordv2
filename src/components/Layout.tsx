@@ -116,7 +116,7 @@ export function Layout() {
         <div className="container mx-auto px-4 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="flex items-center space-x-2">
-              <div className="">
+              <div className=" flex flex-col items-center justify-center">
                 <Link to="/" className="flex items-center space-x-2">
                   <img src={logo} alt="logo" className="w-24 md:w-32" />
                 </Link>
