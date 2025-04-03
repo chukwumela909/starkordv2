@@ -199,14 +199,14 @@ export function FAQ() {
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
-            to="/login"
+            to="https://t.me/starkordsupport"
             className="w-full sm:w-auto px-8 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors flex items-center justify-center space-x-2 group"
           >
             <span>Contact Support</span>
             <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </Link>
           <a
-            href="#"
+            href="https://starkord.com/starkord-whitepaper.pdf"
             className="w-full sm:w-auto px-8 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg font-medium transition-colors flex items-center justify-center space-x-2"
           >
             <RefreshCw className="w-5 h-5" />

@@ -148,7 +148,7 @@ export function Layout() {
               <span className="sr-only">Telegram Channel</span>
             </a>
             <a
-              href="https://twitter.com/starkordpool"
+              href="https://x.com/starkordfi"
               target="_blank"
               rel="noopener noreferrer"
               className="text-slate-400 hover:text-blue-400 transition-colors"

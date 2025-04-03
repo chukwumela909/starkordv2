@@ -1,18 +1,18 @@
 
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { 
-  Shield, 
-  Users, 
-  Globe, 
- 
-  Lock, 
+import {
+  Shield,
+  Users,
+  Globe,
+
+  Lock,
 
   Hexagon,
-  
+
   ArrowUpRight,
   CheckCircle2,
- 
+
   Lightbulb,
   Target,
   Heart,
@@ -78,10 +78,10 @@ export function About() {
         >
           <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Our Vision</h2>
           <p className="text-slate-300">
-            At Starkord, we're revolutionizing the staking landscape by making it accessible, secure, and rewarding for everyone. Our platform combines cutting-edge technology with user-centric design to deliver an unmatched staking experience.
+            At Starkord, we aim to become the leading AI-driven staking platform, delivering intelligent, transparent, and profitable staking solutions for global investors.
           </p>
           <p className="text-slate-300">
-            We believe in the transformative power of decentralized finance to create a more inclusive and efficient financial system. Through our innovative staking solutions, we're enabling users worldwide to participate in the future of finance.
+            We are committed to providing sustainable, high-yield staking through real-time AI optimization, ensuring a trustless, decentralized, and secure ecosystem. With a smart penalty system that enables instant liquidity and multi-chain staking that broadens investment opportunities, Starkord is redefining the future of digital asset staking.
           </p>
           <div className="flex flex-col sm:flex-row items-center gap-4 pt-4">
             <Link
