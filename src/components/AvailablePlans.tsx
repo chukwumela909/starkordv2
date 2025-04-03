@@ -222,7 +222,7 @@ export function AvailablePlans({ onStake, actionLoading }: AvailablePlansProps) 
           const isGeneratingAddress = actionLoading === `generating_address_${plan.name}`
           const minStake = Number.parseFloat(plan.min_amount)
           const dailyYield = Number.parseFloat(plan.dpy)
-          const minStakeUSD = minStake * ethPrice
+          // const minStakeUSD = minStake * ethPrice
           const IconComponent = ICON_MAP[plan.icon] || Shield
           const highlight = HIGHLIGHT_MAP[plan.name] || "Recommended"
           const features = FEATURES_MAP[plan.name] || [
@@ -267,7 +267,7 @@ export function AvailablePlans({ onStake, actionLoading }: AvailablePlansProps) 
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
                   <span className="text-sm text-white/70">Min Stake</span>
                   <div className="font-bold text-xl">{minStake} ETH</div>
-                  <div className="text-sm text-white/70">≈ ${minStakeUSD.toLocaleString()}</div>
+                  {/* <div className="text-sm text-white/70">≈ ${minStakeUSD.toLocaleString()}</div> */}
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
                   <span className="text-sm text-white/70">Daily Yield</span>

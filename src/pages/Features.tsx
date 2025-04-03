@@ -268,7 +268,7 @@ export function Features() {
         <h2 className="text-3xl font-bold text-center mb-12">Available Staking Plans</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {PLANS.map((plan, index) => {
-            const minStakeUSD = plan.minStake * ethPrice;
+            // const minStakeUSD = plan.minStake * ethPrice;
             
             return (
               <motion.div
@@ -303,9 +303,9 @@ export function Features() {
                   <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
                     <span className="text-sm text-white/70">Min Stake</span>
                     <div className="font-bold text-xl">{plan.minStake} ETH</div>
-                    <div className="text-sm text-white/70">
+                    {/* <div className="text-sm text-white/70">
                       ≈ ${minStakeUSD.toLocaleString()}
-                    </div>
+                    </div> */}
                   </div>
                   <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
                     <span className="text-sm text-white/70">Daily Yield</span>

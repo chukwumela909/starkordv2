@@ -481,7 +481,7 @@ export function Dashboard() {
                             <p className="text-sm text-slate-400">Next Yield Increase</p>
                             <div className="flex items-center space-x-2">
                               <p className="text-lg font-bold">{daysRemainingBonusAct} days</p>
-                              {stake.bonus_yield === "1" ? <ChevronUp className="w-4 h-4 text-blue-400"  /> : <></> }
+                              {stake.bonus_yield === "1" ? <ChevronUp className="w-4 h-4 text-green-400"  /> : <></> }
                             </div>
                             <p className="text-sm text-slate-400">
                               {stake.bonus_yield === "1" ? "Until next yield increase" : "Until bonus activation"}

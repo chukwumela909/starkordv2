@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Menu, X,  } from 'lucide-react';
+import { Menu, X, } from 'lucide-react';
 import logo from '../../images/starkordMainLogo.png';
 import telegram from '../../images/telegram.png';
 import Xtwitter from '../../images/x.png';
@@ -116,9 +116,13 @@ export function Layout() {
         <div className="container mx-auto px-4 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="flex items-center space-x-2">
-              <Link to="/" className="flex items-center space-x-2">
-                <img src={logo} alt="logo" className="w-24 md:w-32" />
-              </Link>
+              <div className="">
+                <Link to="/" className="flex items-center space-x-2">
+                  <img src={logo} alt="logo" className="w-24 md:w-32" />
+                </Link>
+                <p className='text-gray-500 mt-2'>STARKORD FINANCIAL LLC</p>
+              </div>
+
             </div>
             <div className="flex items-center space-x-6">
               {navItems.map((item) => (
